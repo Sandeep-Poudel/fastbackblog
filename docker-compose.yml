@@ -1,0 +1,37 @@
+services:
+  web:
+    build: .
+    # image: 12factordemo:latest
+    image: poudelsandeep/12factor:latest
+    container_name: backend
+
+    ports:
+      - "${PORT}:${PORT}"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./app:/app/app
+
+    command: uvicorn app.main:app --host ${HOST} --port ${PORT}
+    # --reload
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://${HOST}:${PORT}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mkdocs:
+    image: poudelsandeep/12factor:latest
+    # image: 12factordemo:latest
+    container_name: mkdocs
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docs:/app/docs
+      - ./mkdocs.yml:/app/mkdocs.yml
+    working_dir: /app
+    command: mkdocs serve --dev-addr=0.0.0.0:9090
+    restart: unless-stopped

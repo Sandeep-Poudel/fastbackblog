@@ -1,0 +1,9 @@
+site_name: 12 Factor App 
+site_description: A short app made using 12 factor app principles
+nav:
+  - Getting Started:
+      - Setting Up Project: project_setup.md
+      - API Guide: api_guide.md
+
+theme:
+  name: readthedocs
