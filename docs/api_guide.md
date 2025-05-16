@@ -70,7 +70,9 @@ This guide provides details on how to interact with the Blog API.
 - **Request Body**:
   ```json
   {
-    "title": "Updated Blog Title"
+    "title": "Updated Blog Title",
+    "description": "This is a sample blog.",
+    "author": "Author Name"
   }
   ```
 - **Response**:
